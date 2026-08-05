@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>MinecraftServerPilot</AssemblyName>
+    <RootNamespace>MinecraftServerPilot</RootNamespace>
+    <Version>0.3.0</Version>
+    <Authors>Minecraft Server Pilot contributors</Authors>
+    <Description>面向 Windows 的高容错 Minecraft 服务端安装与诊断工具</Description>
+    <InvariantGlobalization>false</InvariantGlobalization>
+  </PropertyGroup>
+</Project>

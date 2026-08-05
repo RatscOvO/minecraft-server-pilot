@@ -1,0 +1,62 @@
+<Window x:Class="MinecraftServerPilot.ServerPropertiesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="服务端设置" Width="920" Height="720"
+        MinWidth="760" MinHeight="560" WindowStartupLocation="CenterOwner"
+        Background="{StaticResource BackgroundBrush}"
+        Foreground="{StaticResource TextBrush}"
+        FontFamily="Microsoft YaHei UI">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <TextBlock Text="服务端设置" FontSize="23" FontWeight="Bold" />
+            <TextBlock x:Name="ServerSummaryText" Foreground="{StaticResource MutedBrush}"
+                       Margin="0,5,0,0" />
+        </StackPanel>
+
+        <Border Grid.Row="1" Background="#151F2B" BorderBrush="#29445D"
+                BorderThickness="1" CornerRadius="8" Padding="13" Margin="0,16,0,14">
+            <StackPanel>
+                <TextBlock Text="版本感知保护" FontWeight="SemiBold" Foreground="#B9D8F2" />
+                <TextBlock x:Name="CompatibilitySummaryText" Foreground="#B9D8F2"
+                           FontSize="11" TextWrapping="Wrap" Margin="0,5,0,0" />
+                <TextBlock Text="设置在下次启动时生效。若服务端正在运行，请先在控制台输入 stop 并等待保存完成。"
+                           Foreground="#F2D28B" FontSize="11" TextWrapping="Wrap" Margin="0,5,0,0" />
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="2" Background="{StaticResource PanelBrush}"
+                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                CornerRadius="10">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="18">
+                <StackPanel x:Name="EditorsPanel" />
+            </ScrollViewer>
+        </Border>
+
+        <Grid Grid.Row="3" Margin="0,14,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="FooterText" Foreground="{StaticResource MutedBrush}"
+                       VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,14,0" />
+            <Button Grid.Column="1" Content="打开原始文件" Click="OpenRawButton_OnClick" />
+            <Button Grid.Column="3" Content="重新读取" Click="ReloadButton_OnClick" />
+            <Button Grid.Column="5" Content="取消" Click="CancelButton_OnClick" />
+            <Button Grid.Column="7" Content="保存设置" Click="SaveButton_OnClick"
+                    Background="#238636" BorderBrush="#2EA043" MinWidth="116" />
+        </Grid>
+    </Grid>
+</Window>

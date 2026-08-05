@@ -1,0 +1,171 @@
+<Window x:Class="JavaPilot.RuntimeManagerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Java Pilot - 管理本机 Java"
+        Width="1080"
+        Height="680"
+        MinWidth="900"
+        MinHeight="500"
+        Background="{StaticResource WindowBackgroundBrush}"
+        Foreground="{StaticResource TextBrush}"
+        FontFamily="Microsoft YaHei UI"
+        WindowStartupLocation="CenterOwner"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing">
+    <Grid Margin="22">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,14">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock Text="管理本机 Java"
+                           FontSize="23" FontWeight="Bold" />
+                <TextBlock x:Name="InstallRootText"
+                           Foreground="{StaticResource MutedTextBrush}"
+                           Margin="0,5,0,0" TextWrapping="Wrap" />
+            </StackPanel>
+            <Button Grid.Column="1" x:Name="ClearBackupsButton"
+                    Content="清除备份" Margin="0,0,8,0"
+                    ToolTip="清除 Java Pilot 保存的系统环境变量备份"
+                    Click="ClearBackups_Click" />
+            <Button Grid.Column="2" Content="刷新并验证"
+                    Click="Refresh_Click" />
+        </Grid>
+
+        <Border Grid.Row="1" Background="{StaticResource PanelBrush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="1" CornerRadius="10">
+            <Grid>
+                <ListBox x:Name="RuntimeList"
+                         Background="Transparent" BorderThickness="0"
+                         Margin="12"
+                         SelectionChanged="RuntimeList_SelectionChanged"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="Margin" Value="0,0,0,8" />
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border x:Name="Card" Background="{StaticResource CardBrush}"
+                                                BorderBrush="{StaticResource BorderBrush}"
+                                                BorderThickness="1"
+                                                CornerRadius="8" Padding="14,12">
+                                            <ContentPresenter />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Card"
+                                                        Property="Background"
+                                                        Value="{StaticResource CardHoverBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter TargetName="Card"
+                                                        Property="Background"
+                                                        Value="{StaticResource SelectedCardBrush}" />
+                                                <Setter TargetName="Card"
+                                                        Property="BorderBrush"
+                                                        Value="{StaticResource AccentBrush}" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="175" />
+                                    <ColumnDefinition Width="205" />
+                                    <ColumnDefinition Width="185" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding DisplayVersion}"
+                                               FontSize="16" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding ProviderText}"
+                                               Foreground="#238A5C"
+                                               Margin="0,4,0,0" FontSize="12" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock>
+                                        <Run Text="{Binding OwnershipText, Mode=OneWay}" />
+                                        <Run Text="{Binding DefaultText, Mode=OneWay}" />
+                                    </TextBlock>
+                                    <TextBlock Margin="0,4,0,0" FontSize="11.5">
+                                        <Run Text="{Binding ArchitectureText, Mode=OneWay}" />
+                                        <Run Text=" · " />
+                                        <Run Text="{Binding Source, Mode=OneWay}" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Text="{Binding ProductName}"
+                                               TextWrapping="Wrap" />
+                                    <TextBlock Text="{Binding InstalledAtText}"
+                                               Foreground="{StaticResource MutedTextBrush}"
+                                               Margin="0,4,0,0" FontSize="11.5" />
+                                </StackPanel>
+                                <TextBlock Grid.Column="3" Text="{Binding JavaHome}"
+                                           Foreground="{StaticResource MutedTextBrush}"
+                                           TextWrapping="Wrap"
+                                           VerticalAlignment="Center" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <TextBlock x:Name="EmptyText"
+                           Text="没有检测到可以启动的 Java。"
+                           Foreground="{StaticResource MutedTextBrush}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Visibility="Collapsed" />
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="2" Margin="0,14,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="StatusText"
+                       Text="选择一个运行时进行管理。"
+                       Foreground="{StaticResource MutedTextBrush}"
+                       VerticalAlignment="Center" TextWrapping="Wrap" />
+            <Button Grid.Column="1" x:Name="SetDefaultButton"
+                    Content="设为默认 Java" IsEnabled="False"
+                    Margin="8,0,0,0" Click="SetDefault_Click" />
+            <Button Grid.Column="2" x:Name="OpenFolderButton"
+                    Content="打开目录" IsEnabled="False"
+                    Margin="8,0,0,0" Click="OpenFolder_Click" />
+            <Button Grid.Column="3" x:Name="AdoptButton"
+                    Content="复制并纳入管理" IsEnabled="False"
+                    Margin="8,0,0,0" Click="Adopt_Click" />
+            <Button Grid.Column="4" x:Name="RemoveButton"
+                    Content="安全卸载" IsEnabled="False"
+                    Margin="8,0,0,0" Background="#F8E7E9"
+                    Foreground="#A33E48"
+                    BorderBrush="#D9A8AE" Click="Remove_Click" />
+            <Button Grid.Column="5" Content="关闭"
+                    Margin="8,0,0,0" Click="Close_Click" />
+        </Grid>
+    </Grid>
+</Window>

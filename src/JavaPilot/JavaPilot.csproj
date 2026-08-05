@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>JavaPilot</AssemblyName>
+    <RootNamespace>JavaPilot</RootNamespace>
+    <Version>0.5.3</Version>
+    <Authors>Java Pilot contributors</Authors>
+    <Description>面向 Minecraft 的 Windows Java 自动下载、便携安装与诊断工具</Description>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+</Project>

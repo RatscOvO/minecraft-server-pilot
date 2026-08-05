@@ -1,0 +1,97 @@
+<Application x:Class="JavaPilot.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <!-- 雾蓝浅色主题：长时间等待下载时更柔和，深色仅保留给日志控制台。 -->
+        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#E8EFF3" />
+        <SolidColorBrush x:Key="PanelBrush" Color="#F8FBFC" />
+        <SolidColorBrush x:Key="PanelSecondaryBrush" Color="#EEF4F6" />
+        <SolidColorBrush x:Key="CardBrush" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="CardHoverBrush" Color="#F1F7F8" />
+        <SolidColorBrush x:Key="SelectedCardBrush" Color="#E5F6ED" />
+        <SolidColorBrush x:Key="BorderBrush" Color="#CAD8E0" />
+        <SolidColorBrush x:Key="StrongBorderBrush" Color="#AFC2CD" />
+        <SolidColorBrush x:Key="TextBrush" Color="#263746" />
+        <SolidColorBrush x:Key="MutedTextBrush" Color="#667D8E" />
+        <SolidColorBrush x:Key="AccentBrush" Color="#3DB77B" />
+        <SolidColorBrush x:Key="AccentDarkBrush" Color="#27875D" />
+        <SolidColorBrush x:Key="WarningBrush" Color="#C78618" />
+        <SolidColorBrush x:Key="DangerBrush" Color="#C64F5A" />
+        <SolidColorBrush x:Key="ConsoleBrush" Color="#17232D" />
+        <SolidColorBrush x:Key="ConsoleTextBrush" Color="#DCE8EE" />
+
+        <Style TargetType="Window">
+            <Setter Property="Background" Value="{StaticResource WindowBackgroundBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+            <Setter Property="FontFamily" Value="Microsoft YaHei UI" />
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+            <Setter Property="Background" Value="#E8EFF3" />
+            <Setter Property="BorderBrush" Value="#BCCCD5" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="16,9" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="7">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Opacity" Value="0.88" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Border" Property="Opacity" Value="0.75" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Border" Property="Opacity" Value="0.42" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="{StaticResource AccentDarkBrush}" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderBrush" Value="#238052" />
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+            <Setter Property="Background" Value="#FFFFFF" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="11,8" />
+            <Setter Property="CaretBrush" Value="{StaticResource TextBrush}" />
+        </Style>
+
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="ProgressBar">
+            <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
+            <Setter Property="Background" Value="#D4E0E6" />
+            <Setter Property="Height" Value="8" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+    </Application.Resources>
+</Application>

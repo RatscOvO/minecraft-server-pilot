@@ -1,0 +1,284 @@
+<Window x:Class="JavaPilot.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Java Pilot"
+        Width="1280"
+        Height="900"
+        MinWidth="1060"
+        MinHeight="700"
+        Background="{StaticResource WindowBackgroundBrush}"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="92" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="38" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#F4F8FA" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1">
+            <Grid Margin="28,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Border Width="48" Height="48" CornerRadius="12" Background="#DDF3E8" VerticalAlignment="Center">
+                    <TextBlock Text="J" Foreground="#238A5C" FontSize="27" FontWeight="Bold"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <StackPanel Grid.Column="1" Margin="16,0,0,0" VerticalAlignment="Center">
+                    <TextBlock Text="Java Pilot" FontSize="27" FontWeight="Bold" />
+                    <TextBlock Text="面向 Minecraft 的 Java 自动下载、换源、便携安装与完整诊断"
+                               Foreground="{StaticResource MutedTextBrush}" FontSize="13" Margin="0,4,0,0" />
+                </StackPanel>
+                <Border Grid.Column="2" x:Name="HeaderStatusBorder"
+                        Background="#E3F4EA" BorderBrush="#B3DBC4" BorderThickness="1"
+                        CornerRadius="18" Padding="14,7" VerticalAlignment="Center">
+                    <TextBlock x:Name="HeaderStatusText" Text="● 准备就绪"
+                               Foreground="#247B52" FontWeight="SemiBold" />
+                </Border>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" Margin="24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="430" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="{StaticResource PanelBrush}"
+                    BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" CornerRadius="13">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Margin="0,0,0,12">
+                        <TextBlock Text="选择 Java 版本" FontSize="21" FontWeight="Bold" />
+                        <TextBlock Text="只列出 Minecraft 服务端实际常用或兼容所需的版本。"
+                                   Foreground="{StaticResource MutedTextBrush}" Margin="0,5,0,0" />
+                    </StackPanel>
+
+                    <ListBox Grid.Row="1" x:Name="JavaVersionList"
+                             Background="Transparent" BorderThickness="0"
+                             SelectionChanged="JavaVersionList_SelectionChanged"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="Margin" Value="0,0,0,7" />
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="BorderThickness" Value="0" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <Border x:Name="Card" Background="{StaticResource CardBrush}"
+                                                    BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                                                    CornerRadius="8" Padding="13,10">
+                                                <ContentPresenter />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Card" Property="Background" Value="{StaticResource CardHoverBrush}" />
+                                                    <Setter TargetName="Card" Property="BorderBrush" Value="{StaticResource StrongBorderBrush}" />
+                                                </Trigger>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter TargetName="Card" Property="Background" Value="{StaticResource SelectedCardBrush}" />
+                                                    <Setter TargetName="Card" Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Grid>
+                                        <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" />
+                                        <Border HorizontalAlignment="Right" Background="#FFF0CE"
+                                                CornerRadius="8" Padding="7,2"
+                                                Visibility="{Binding IsLegacy, Converter={StaticResource BoolToVisibilityConverter}}">
+                                            <TextBlock Text="旧版兼容" Foreground="#A66B08" FontSize="11" />
+                                        </Border>
+                                    </Grid>
+                                    <TextBlock Text="{Binding Recommendation}" Foreground="#238A5C"
+                                               Margin="0,3,0,0" FontSize="12.5" TextWrapping="Wrap" />
+                                    <TextBlock Text="{Binding Description}"
+                                               Foreground="{StaticResource MutedTextBrush}"
+                                               Margin="0,3,0,0" FontSize="11.5" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <Border Grid.Row="2" x:Name="DefaultJavaStateBorder"
+                            Background="#EDF7F2" BorderBrush="#B8DCC8"
+                            BorderThickness="1" CornerRadius="9" Padding="12,10" Margin="0,12,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <TextBlock Text="当前默认 Java" FontWeight="Bold" FontSize="13"
+                                           VerticalAlignment="Center" />
+                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                    <Button x:Name="RefreshJavaButton"
+                                            Content="刷新" Padding="10,4"
+                                            Click="RefreshJava_Click" />
+                                    <Button x:Name="ManageRuntimesButton"
+                                            Content="管理" Padding="10,4" Margin="6,0,0,0"
+                                            Click="ManageRuntimes_Click" />
+                                </StackPanel>
+                            </Grid>
+                            <TextBlock Grid.Row="1" x:Name="DefaultJavaSummaryText"
+                                       Text="正在读取环境变量与 PATH…"
+                                       Foreground="#247B52" FontWeight="SemiBold"
+                                       Margin="0,5,0,0" FontSize="12" TextWrapping="Wrap" />
+                            <TextBlock Grid.Row="2" x:Name="DefaultJavaDetailText"
+                                       Foreground="{StaticResource MutedTextBrush}"
+                                       Margin="0,3,0,0" FontSize="11" TextWrapping="Wrap" />
+                            <Border Grid.Row="3" Height="1" Background="#D5E3E8"
+                                    Margin="0,7,0,6" />
+                            <TextBlock Grid.Row="4" x:Name="DetectedJavaText"
+                                       Text="本机库存正在扫描…"
+                                       Foreground="{StaticResource MutedTextBrush}"
+                                       FontSize="11.5" TextWrapping="Wrap" />
+                        </Grid>
+                    </Border>
+
+                    <StackPanel Grid.Row="3" Margin="0,12,0,0">
+                        <TextBlock Text="便携 Java 安装根目录" FontWeight="SemiBold" />
+                        <Grid Margin="0,7,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="InstallRootTextBox" VerticalContentAlignment="Center" />
+                            <Button Grid.Column="1" Content="选择…" Margin="8,0,0,0"
+                                    Click="BrowseInstallRoot_Click" />
+                        </Grid>
+                        <TextBlock x:Name="ResolvedTargetText"
+                                   Foreground="{StaticResource MutedTextBrush}"
+                                   Margin="0,5,0,0" FontSize="11.5" TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <CheckBox Grid.Row="4" x:Name="ReuseSystemJavaCheckBox"
+                              IsChecked="True" Margin="0,12,0,0">
+                        <TextBlock Text="优先复用本机同主版本的 64 位 Java，避免重复下载"
+                                   TextWrapping="Wrap" />
+                    </CheckBox>
+
+                    <CheckBox Grid.Row="5" x:Name="SetDefaultJavaCheckBox"
+                              IsChecked="True" Margin="0,9,0,0">
+                        <TextBlock Text="安装后设为当前用户默认 Java（JAVA_HOME 和用户 PATH）"
+                                   TextWrapping="Wrap" />
+                    </CheckBox>
+
+                    <CheckBox Grid.Row="6" x:Name="ForceReinstallCheckBox"
+                              Margin="0,9,0,0">
+                        <TextBlock Text="强制重新下载并覆盖修复（同时用于更新到最新补丁）"
+                                   TextWrapping="Wrap" />
+                    </CheckBox>
+
+                    <Border Grid.Row="7" x:Name="CompatibilityNotice"
+                            Background="#EAF4FB" BorderBrush="#BCD8EA"
+                            BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,12,0,0">
+                        <TextBlock x:Name="CompatibilityNoticeText"
+                                   Foreground="#356E92" TextWrapping="Wrap" />
+                    </Border>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="2" Background="{StaticResource PanelBrush}"
+                    BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" CornerRadius="13">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="20,17,20,11">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="执行中心" FontSize="21" FontWeight="Bold" />
+                            <TextBlock x:Name="StageText" Text="等待选择 Java 版本"
+                                       Foreground="{StaticResource MutedTextBrush}" Margin="0,4,0,0" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <Button Content="打开日志" Click="OpenLog_Click" />
+                            <Button x:Name="OpenInstallFolderButton" Content="打开安装目录"
+                                    IsEnabled="False" Margin="8,0,0,0"
+                                    Click="OpenInstallFolder_Click" />
+                        </StackPanel>
+                    </Grid>
+
+                    <ProgressBar Grid.Row="1" x:Name="InstallProgress"
+                                 Margin="20,0,20,14" Minimum="0" Maximum="100" Value="0" />
+
+                    <TextBox Grid.Row="2" x:Name="LogTextBox"
+                             Margin="0" Padding="18,14"
+                             FontFamily="Consolas" FontSize="12.5"
+                             Background="{StaticResource ConsoleBrush}"
+                             Foreground="{StaticResource ConsoleTextBrush}"
+                             CaretBrush="{StaticResource ConsoleTextBrush}"
+                             BorderBrush="#314552" BorderThickness="0,1,0,1"
+                             IsReadOnly="True" AcceptsReturn="True"
+                             TextWrapping="NoWrap"
+                             VerticalScrollBarVisibility="Auto"
+                             HorizontalScrollBarVisibility="Auto" />
+
+                    <Grid Grid.Row="3" Margin="20,15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="FooterStatusText"
+                                   Text="ZIP 便携安装：不调用 MSI、不需要管理员权限。"
+                                   Foreground="{StaticResource MutedTextBrush}"
+                                   VerticalAlignment="Center" TextWrapping="Wrap" />
+                        <Button Grid.Column="1" x:Name="ImportArchiveButton"
+                                Content="导入本地 JDK ZIP"
+                                Margin="12,0,0,0" Click="ImportArchive_Click" />
+                        <Button Grid.Column="2" x:Name="CancelButton"
+                                Content="取消安装" IsEnabled="False"
+                                Margin="12,0,0,0" Click="CancelInstall_Click" />
+                        <Button Grid.Column="3" x:Name="InstallButton"
+                                Style="{StaticResource PrimaryButton}"
+                                Content="自动下载并安装" Margin="10,0,0,0"
+                                Click="Install_Click" />
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="2" Background="#DDE8ED" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Foreground="#5F7687" FontSize="11.5"
+                       Text="官方供应商多路回退 · 断点续传 · 哈希校验 · 临时目录验证 · 原子部署 · 完整 UTF-8 日志" />
+        </Border>
+    </Grid>
+</Window>

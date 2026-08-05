@@ -1,0 +1,50 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinecraftServerPilot", "src\MinecraftServerPilot\MinecraftServerPilot.csproj", "{0D2A6A4C-0D47-4B53-B63F-0B8445E2B944}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinecraftServerPilot.SmokeTests", "tests\MinecraftServerPilot.SmokeTests\MinecraftServerPilot.SmokeTests.csproj", "{3FE21B1B-85C5-49B6-84F0-9AC7D9EC3AB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeJavaShim", "tests\FakeJavaShim\FakeJavaShim.csproj", "{7FBD5B9E-FE97-4B9C-9B57-BB59C3265F05}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{64E7A1A7-FA12-4B7E-AF07-0EB604A9ADB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JavaPilot", "src\JavaPilot\JavaPilot.csproj", "{68C47B9D-F3CF-4A23-BBE9-FE22959134C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E77A8CE8-8237-48AD-B418-A321F799CE8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JavaPilot.SmokeTests", "tests\JavaPilot.SmokeTests\JavaPilot.SmokeTests.csproj", "{AA754AE0-5760-4BB9-BACC-356F3E2BBB25}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D2A6A4C-0D47-4B53-B63F-0B8445E2B944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D2A6A4C-0D47-4B53-B63F-0B8445E2B944}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D2A6A4C-0D47-4B53-B63F-0B8445E2B944}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D2A6A4C-0D47-4B53-B63F-0B8445E2B944}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FE21B1B-85C5-49B6-84F0-9AC7D9EC3AB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FE21B1B-85C5-49B6-84F0-9AC7D9EC3AB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FE21B1B-85C5-49B6-84F0-9AC7D9EC3AB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FE21B1B-85C5-49B6-84F0-9AC7D9EC3AB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FBD5B9E-FE97-4B9C-9B57-BB59C3265F05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FBD5B9E-FE97-4B9C-9B57-BB59C3265F05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FBD5B9E-FE97-4B9C-9B57-BB59C3265F05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FBD5B9E-FE97-4B9C-9B57-BB59C3265F05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68C47B9D-F3CF-4A23-BBE9-FE22959134C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68C47B9D-F3CF-4A23-BBE9-FE22959134C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68C47B9D-F3CF-4A23-BBE9-FE22959134C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68C47B9D-F3CF-4A23-BBE9-FE22959134C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA754AE0-5760-4BB9-BACC-356F3E2BBB25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA754AE0-5760-4BB9-BACC-356F3E2BBB25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA754AE0-5760-4BB9-BACC-356F3E2BBB25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA754AE0-5760-4BB9-BACC-356F3E2BBB25}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{68C47B9D-F3CF-4A23-BBE9-FE22959134C4} = {64E7A1A7-FA12-4B7E-AF07-0EB604A9ADB8}
+		{AA754AE0-5760-4BB9-BACC-356F3E2BBB25} = {E77A8CE8-8237-48AD-B418-A321F799CE8E}
+	EndGlobalSection
+EndGlobal

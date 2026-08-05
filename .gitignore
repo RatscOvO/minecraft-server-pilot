@@ -1,0 +1,20 @@
+# .NET build output
+[Bb]in/
+[Oo]bj/
+dist/
+
+# Visual Studio and user-specific files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Test results and local runtime state
+TestResults/
+.pilot-session.json
+*.log
+
+# Operating system metadata
+.DS_Store
+Thumbs.db
